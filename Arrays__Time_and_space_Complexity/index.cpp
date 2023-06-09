@@ -684,21 +684,7 @@ int main() {
 
 
 
-// // 2(b)-: move all negative numbers to the left of an array
-// vector<int> arr{1, -1, 3, 2, -7, -5, 11, 6};
-// int start = 0;
-// int end = arr.size()-1;
-
-// while(start < end) {
-//     if(arr[start] < 0) start++;
-
-//     else if(arr[end] > 0) end--;
-
-//     swap(arr[start], arr[end]);
-// }
-
-
-// // 2(c)-: move all negative numbers to the end of an array wihtout changing the order of the numbers
+// // 2(b)-: move all negative numbers to the end of an array wihtout changing the order of the numbers
 // vector<int> arr{1, -1, 3, 2, -7, -5, 11, 6};
 // vector<int> copy(arr.size());
 // int start = 0;

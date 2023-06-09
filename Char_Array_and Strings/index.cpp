@@ -624,21 +624,30 @@ void reverse(char arr[]) {
 
 
 
-// int myAtoi(string s) {
-//     s.erase(remove_if(s.begin(), s.end(), ::isspace), s.end());
-//     int sign = 1;
-//     int ans = 0; 
+int myAtoi(string s) {
+    int sign = 1;
+    int ans = 0; 
+    int i=0;
 
-//     for(int i=0; i<s.length(); i++) {
-//         if(ans > INT_MAX/10 || (ans == INT_MAX) && s[i] > '7') {
-//             return sign == -1 ? INT_MIN : INT_MAX;
-//         }
-//         if(s[i] == '-') sign = -1;
-//         if(isdigit(s[i])) ans = ans*10 + (s[i]-'0');
-//     }
+    while(i<s.length() && s[i] == ' ') {
+        i++;
+    }
 
-//     return ans*sign;
-// }
+    if(i<s.length() && (s[i] == '+' || s[i] == '-')) {
+        sign  = s[i] == '-' ? -1 : 1;
+        i++;
+    }
+
+    while(i<s.length() && isdigit(s[i])) {
+        if(ans > INT_MAX/10 || (ans == INT_MAX/10 && s[i] > '7')) {
+        return sign == -1 ? INT_MIN : INT_MAX;
+    }
+        ans = ans*10 + (s[i]-'0');
+        i++;
+    }
+
+    return ans*sign;
+}
 
 
 // int stringCompress(vector<char> chars) {

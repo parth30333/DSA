@@ -15,7 +15,7 @@ using namespace std;
 //     while(n>0) {
 //     int bit = n % 2;
 //     binaryNo = bit*pow(10, i++) + binaryNo; 
-//     n = n/2;`
+//     n = n/2;
 //     }
 //     return binaryNo;
 // } 
@@ -130,7 +130,7 @@ using namespace std;
 // int printDigitsInteger(int n) {
 //     int ans = 0;
 //     bool isNeg = false;
-//     if(n <= INT_MIN) return 0; // <= because in case of a -ve no. we are doing n = -n and INT_MIN = -2147483648 and INT_MAX = 2147483647, so -(-2147483648)  = 2147483648 which is greater then INT_MAX
+//     if(n <= INT_MIN) return 0; // => because in case of a -ve no. we are doing n = -n and INT_MIN = -2147483648 and INT_MAX = 2147483647, so -(-2147483648)  = 2147483648 which is greater then INT_MAX
 
 
 //     if(n<0) {
@@ -279,7 +279,6 @@ int main() {
 int n;
 cin >> n;
 findSetBits(n);
-
 
 
 
