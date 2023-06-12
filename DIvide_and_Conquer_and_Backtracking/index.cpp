@@ -84,7 +84,7 @@ using namespace std;
 //     swap(arr[pivotind], arr[s+count]);
 //     pivotind = s+count;
 
-//     // Make sure every element on left <= pivot and every element on right >= pivot
+//     // Make sure every element on left <= pivot and every element on right > pivot
 //     int i = s;
 //     int j = e;
 
@@ -391,7 +391,7 @@ bool sudokuSolver(vector<vector<char>>& board) {
 
 int main() {
 
-// // Merger Sort    
+// // Merge Sort    
 // // vector<int> arr = {4,13,52,8,31};
 // vector<int> arr = {4,13,52,8,31,1,7};
 
