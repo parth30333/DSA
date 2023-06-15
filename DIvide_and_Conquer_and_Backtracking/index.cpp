@@ -6,13 +6,13 @@
 #include<string>
 #include<cmath>
 #include<map>
+#include<set>
 #include<unordered_map>
 
 using namespace std;
 
 // Functions
-// void merge(vector<int>& arr, int s, int e) {
-//     int mid = s + (e-s)/2;
+// void merge(vector<int>& arr, int s, int e, int mid) {
 //     int len1 = mid-s + 1;
 //     int len2 = e-mid;
 
@@ -68,7 +68,7 @@ using namespace std;
 
 
 //     // merge arrays
-//     merge(arr, s, e);
+//     merge(arr, s, e, mid);
 // }
 
 
@@ -340,54 +340,250 @@ using namespace std;
 // }
 
 
-bool isSafe(vector<vector<char>>& board, int row, int col, int x) {
-    // row check
-    for(int i=0; i<9; i++) {
-        if(board[i][col] == x) return false;
+// bool isSafe(vector<vector<char>>& board, int row, int col, int x) {
+//     // row check
+//     for(int i=0; i<9; i++) {
+//         if(board[i][col] == x) return false;
+//     }
+
+//     for(int i=0; i<9; i++) {
+//         if(board[row][i] == x) return false;
+//     }
+
+//     for(int i=0; i<9; i++) {
+//         if(board[3*(row/3) + i/3][3*(col/3) + i%3] == x) return false;
+//     }
+
+//     return true;
+// }
+
+
+
+// bool sudokuSolver(vector<vector<char>>& board) {
+//     for(int i=0; i<board.size(); i++) {
+//         for(int j=0; j<board[0].size(); j++) {
+            
+//             // if cell is not filled
+//             if(board[i][j] == '.') {
+            
+//                 for(char k='1'; k<='9'; k++) {
+//                     if(isSafe(board, i, j, k)) {
+//                         board[i][j] = k;
+
+//                         // next recursion will handle
+//                         bool isValidSolution = sudokuSolver(board);
+
+//                         if(isValidSolution == true) return true;
+
+//                         else {
+//                             // Backtrack
+//                             board[i][j] = '.';
+//                         }
+//                     }
+//                 }
+//                 return false;
+//             }
+//         }
+//     }
+//     // when entire box is filled
+//     return true;
+// }
+
+///////////////
+// // count inversions
+// int merge(vector<int>& arr, int s, int e, int mid) {
+//     int cnt = 0;
+//     int left = s;
+//     int right = mid+1;
+//     vector<int> temp;
+
+//     while(left <= mid && right <= e) {
+//         if(arr[left] <= arr[right])  temp.push_back(arr[left++]);
+        
+
+//         else {
+//             temp.push_back(arr[right++]);
+//             cnt += (mid-left+1);
+//         }
+//     }
+
+//     while(left <= mid) temp.push_back(arr[left++]);
+
+//     while(right <= e) temp.push_back(arr[right++]);
+
+    
+//     for(int i=s; i<=e; i++) {
+//         arr[i] = temp[i-s];
+//     }
+
+//     return cnt;
+// }
+ 
+
+// int mergerSort(vector<int>& arr, int s, int e) {
+//     int cnt = 0;
+//     if(s >= e) return cnt;
+
+//     int mid = s + (e-s)/2;
+//     cnt += mergerSort(arr, s, mid);
+//     cnt += mergerSort(arr, mid+1, e);
+
+//     cnt += merge(arr, s, e, mid);
+
+//     return cnt;
+// }
+
+// int countInversions(vector<int>& arr) {
+//     return mergerSort(arr, 0, arr.size()-1);
+// }
+
+
+
+
+
+
+// //////////////
+// // In place merger sort
+
+// void In_Place_Merge(vector<int>& arr, int s, int e, int mid) {
+//     // gap = total_elements / 2 + total_elements%2
+//     int total = e-s+1;
+//     int gap = total/2 + total%2;
+
+//     while(gap > 0) {
+//         int i = s, j = s+gap;
+//         while(i <= e && j <= e) {
+//             if(arr[i] > arr[j]) swap(arr[i], arr[j]);
+//             i++; j++;
+//         }
+//         gap = gap <= 1 ? 0 : (gap/2) + (gap%2);
+//     }
+// }
+
+// void InPlaceMergeSort(vector<int>& arr, int s, int e) {
+//     if(s >= e)  return;
+
+//     int mid = s + (e-s)/2;
+//     InPlaceMergeSort(arr, s, mid);
+//     InPlaceMergeSort(arr, mid+1, e);
+
+//     In_Place_Merge(arr, s, e, mid);
+// }
+
+
+
+// int maxSubArray(vector<int>& arr) {
+//     int sum = 0;
+//     int maxi = INT_MIN;
+
+//     for(auto x: arr) {
+//         sum += x;
+
+//         maxi = max(maxi, sum);
+//         if(sum < 0) sum = 0;
+//     }
+
+//     return maxi;
+// }
+
+
+
+// int maxSubArray2(vector<int>& arr, int s, int e) {
+//     // B.C
+//     if(s >= e) return arr[s];
+
+//     int maxLeftBorderSum = INT_MIN, maxRightBorderSum = INT_MIN;
+//     int mid = s + ((e-s) >> 1);
+    
+//     int maxLeftSum = maxSubArray2(arr, s, mid);
+//     int maxRightSum = maxSubArray2(arr, mid+1, e);
+
+//     // Process to find cross border sum or sum throughout the array
+//     int leftBorderSum = 0, rightBorderSum = 0;
+//     for(int i=mid; i>=s; i--) {
+//         leftBorderSum += arr[i];
+//         if(leftBorderSum > maxLeftBorderSum) maxLeftBorderSum = leftBorderSum;
+//     }
+
+//     for(int i=mid+1; i<=e; i++) {
+//         rightBorderSum += arr[i];
+//         if(rightBorderSum > maxRightBorderSum) maxRightBorderSum = rightBorderSum;
+//     }
+
+//     int crossBorderSum = maxLeftBorderSum + maxRightBorderSum;
+//     return max(maxLeftSum, max(maxRightSum, crossBorderSum)); // to compare crossBorderSum with maxLeftSum and maxRightSum
+// }
+
+
+
+// void combinationSum(vector<int>& arr, vector<vector<int>>& ans, vector<int>& output, int target, int index) {
+//     // B.C
+//     if(target == 0) {  
+//         ans.push_back(output);
+//         return;
+//     }
+//     if(target < 0) return;
+
+
+//     // process
+//     for(int i=index; i<arr.size(); i++) {
+//         output.push_back(arr[i]);
+//         combinationSum(arr, ans, output, target-arr[i], i);
+
+//         // backtrack
+//         output.pop_back();
+//     }
+// }
+
+
+
+// void combinationSum2(vector<int>& arr, vector<vector<int>>& ans, vector<int>& output, int target, int index) {
+//     // B.C
+//     if(target == 0) {  
+//         ans.push_back(output);
+//         return;
+//     }
+//     if(target < 0) return;
+
+
+//     // process
+//     for(int i=index; i<arr.size(); i++) {
+//         if(i > index && arr[i-1] == arr[i]) continue; // this line is used to avoid adding any duplicate in the answer
+//         output.push_back(arr[i]);
+//         combinationSum2(arr, ans, output, target-arr[i], i+1);
+
+//         // backtrack
+//         output.pop_back();
+//     }
+// }
+
+
+
+
+void permutation2(vector<int>& arr, vector<vector<int>>& ans, int start) {
+    // B.C
+    if(start >= arr.size()) {
+        ans.push_back(arr);
+        return;
     }
 
-    for(int i=0; i<9; i++) {
-        if(board[row][i] == x) return false;
-    }
 
-    for(int i=0; i<9; i++) {
-        if(board[3*(row/3) + i/3][3*(col/3) + i%3] == x) return false;
-    }
+    unordered_map<int, bool> mp;
+    for(int i=start; i<arr.size(); i++) {
+        // if current element is already used to make a permutation
+        if(mp.find(arr[i]) != mp.end()) continue;
+        else mp[arr[i]] = true;
 
-    return true;
+        swap(arr[start], arr[i]);
+        permutation2(arr, ans, start+1);
+        // backtrack
+        swap(arr[start], arr[i]);
+    }
 }
 
 
 
-bool sudokuSolver(vector<vector<char>>& board) {
-    for(int i=0; i<board.size(); i++) {
-        for(int j=0; j<board[0].size(); j++) {
-            
-            // if cell is not filled
-            if(board[i][j] == '.') {
-            
-                for(char k='1'; k<='9'; k++) {
-                    if(isSafe(board, i, j, k)) {
-                        board[i][j] = k;
 
-                        // next recursion will handle
-                        bool isValidSolution = sudokuSolver(board);
-
-                        if(isValidSolution == true) return true;
-
-                        else {
-                            // Backtrack
-                            board[i][j] = '.';
-                        }
-                    }
-                }
-                return false;
-            }
-        }
-    }
-    // when entire box is filled
-    return true;
-}
 
 int main() {
 
@@ -482,17 +678,115 @@ int main() {
 // cout << endl;
 
 
-// Sudoku Solver
-vector<vector<char>> board = {{'5','3','.','.','7','.','.','.','.'},{'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},{'8','.','.','.','6','.','.','.','3'},{'4','.','.','8','.','3','.','.','1'},{'7','.','.','.','2','.','.','.','6'},{'.','6','.','.','.','.','2','8','.'},{'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
+// // Sudoku Solver
+// vector<vector<char>> board = {{'5','3','.','.','7','.','.','.','.'},{'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},{'8','.','.','.','6','.','.','.','3'},{'4','.','.','8','.','3','.','.','1'},{'7','.','.','.','2','.','.','.','6'},{'.','6','.','.','.','.','2','8','.'},{'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
 
-if(sudokuSolver(board)) {
-    for(int i=0; i<board.size(); i++) {
-        for(int j=0; j<board[i].size(); j++) {
-            cout << board[i][j] << " ";
-        }
-        cout << endl;
+// if(sudokuSolver(board)) {
+//     for(int i=0; i<board.size(); i++) {
+//         for(int j=0; j<board[i].size(); j++) {
+//             cout << board[i][j] << " ";
+//         }
+//         cout << endl;
+//     }
+// }
+
+
+
+
+// Assignment Questions
+// // Count Inversions
+// vector<int> arr = {5,3,2,1,4};
+
+// cout << countInversions(arr);
+// cout << endl;
+// for(auto x: arr) cout << x << " ";
+
+
+
+// // In place merge sort
+// vector<int> arr = {5,3,2,1,4};
+
+// InPlaceMergeSort(arr, 0, arr.size()-1);
+
+// for(auto x: arr) cout << x << " ";
+
+
+
+// // Max Sub-array sum
+// // vector<int> arr = {-2,1,-3,4,-1,2,1,-5,4};
+// vector<int> arr = {5,4,-1,7,8};
+
+// cout << maxSubArray(arr);
+
+
+
+// // Max Sub-array sum using divide N Conquer
+// vector<int> arr = {-2,1,-3,4,-1,2,1,-5,4};
+// // vector<int> arr = {5,4,-1,7,8};
+
+// cout << maxSubArray2(arr, 0, arr.size()-1);
+
+
+
+// // Combination Sum
+// // vector<int> arr = {2,3,6,7};
+// // int target = 7;
+// vector<int> arr = {2,3,5};
+// int target = 8;
+
+
+// vector<vector<int>> ans;
+// vector<int> output;
+
+// combinationSum(arr, ans, output, target, 0);
+
+
+
+// for(int i=0; i<ans.size(); i++) {
+//     for(int j=0; j<ans[i].size(); j++) {
+//         cout << ans[i][j] << " ";
+//     }
+//     cout << endl;
+// }
+
+
+
+
+// // Combination Sum 2 (leetcode)
+// vector<int> arr = {10,1,2,7,6,1,5};
+// int  target = 8;
+
+// sort(arr.begin(), arr.end());  // we have sorted our because on leetcode answers were accepted in sorted array, if the main array is sorted then answers produced in combinationSUm2() will be in sorted order
+// vector<vector<int>> ans;
+// vector<int> output;
+
+// combinationSum2(arr, ans, output, target, 0);
+
+// for(int i=0; i<ans.size(); i++) {
+//     for(int j=0; j<ans[i].size(); j++) {
+//         cout << ans[i][j] << " ";
+//     }
+//     cout << endl;
+// }
+
+
+
+// Permutation 2 (leetcode)
+// vector<int> arr = {1,2,3};
+vector<int> arr = {1,1,2};
+vector<vector<int>> ans;
+
+permutation2(arr, ans, 0);
+
+
+for(int i=0; i<ans.size(); i++) {
+    for(int j=0; j<ans[i].size(); j++) {
+        cout << ans[i][j] << " ";
     }
+    cout << endl;
 }
+
+
 
 
 
