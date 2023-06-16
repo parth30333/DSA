@@ -23,7 +23,7 @@ class Animals {
     string name;
 
 
-// Overriding default constructor
+// default constructor
 Animals() {
     this->age = 0;
     this->weight = 0;
@@ -99,7 +99,7 @@ int main() {
 
 
 
-// dynamic memory creation
+// dynamic object creation
 Animals* dog = new Animals;
 
 // (*dog).age = 5;
@@ -122,14 +122,17 @@ Animals* b = new Animals(10,20, "Lebra");
 
 
 // copying an object using copying constructor
+// Copying statically
 Animals c = a;
 Animals a1(c); // we are copying c in a1
 
 cout << c.age << endl;
 cout << a1.age;
 
+
+// Copying dynamic objects
+Animals*d = b;
+
 delete b;
-
-
 return 0;
 }

@@ -560,29 +560,106 @@ using namespace std;
 
 
 
-void permutation2(vector<int>& arr, vector<vector<int>>& ans, int start) {
-    // B.C
-    if(start >= arr.size()) {
-        ans.push_back(arr);
-        return;
+// void permutation2(vector<int>& arr, vector<vector<int>>& ans, int start) {
+//     // B.C
+//     if(start >= arr.size()) {
+//         ans.push_back(arr);
+//         return;
+//     }
+
+
+//     unordered_map<int, bool> mp;
+//     for(int i=start; i<arr.size(); i++) {
+//         // if current element is already used to make a permutation
+//         if(mp.find(arr[i]) != mp.end()) continue;
+//         else mp[arr[i]] = true;
+
+//         swap(arr[start], arr[i]);
+//         permutation2(arr, ans, start+1);
+//         // backtrack
+//         swap(arr[start], arr[i]);
+//     }
+// }
+
+
+// void beautifullArrangement(vector<int>& temp, int n, int currNum, int& count) {
+//     // B.C
+//     if(currNum == n+1) {
+//         count++;
+//         return;
+//     }
+
+//     for(int i=1; i<=n; i++) {
+//         if(temp[i] == 0 && (currNum % i == 0 || i % currNum == 0)) {
+//             temp[i] = currNum;
+//             beautifullArrangement(temp, n, currNum+1, count);
+            
+//             // backtrack
+//             temp[i] = 0;
+//         }
+//     }
+// }
+
+
+
+helper(vector<int>& counts, vector<int>& quant, int ithOrder) {
+    if(ithOrder == quant.size()) {
+        return true;
     }
 
+    for(int i=0; i<counts.size(); i++) {
+        if(counts[i] - quant[ithOrder] >= 0) {
+            counts[i] -= quant[ithOrder];
+            if(helper(counts, quant, ithOrder+1)) return true;
 
-    unordered_map<int, bool> mp;
-    for(int i=start; i<arr.size(); i++) {
-        // if current element is already used to make a permutation
-        if(mp.find(arr[i]) != mp.end()) continue;
-        else mp[arr[i]] = true;
-
-        swap(arr[start], arr[i]);
-        permutation2(arr, ans, start+1);
-        // backtrack
-        swap(arr[start], arr[i]);
+            // backtrack
+            counts[i] += quant[ithOrder];
+        }
     }
+    return false;
 }
 
 
 
+bool canDistribute(vector<int> nums, vector<int> quant) {
+    // map<int, int> mp;
+    // for(auto x: nums) mp[x]++;
+
+    // for(auto it = mp.begin(); it != mp.end(); it++) cout << it->first << "-: " << it->second << endl;
+
+    // int diff = 0;
+    // for(int i=0; i<quant.size(); i++) {
+    //     bool flag = true;
+    //     for(int j=0; j<nums.size(); j++) {
+    //         if(mp[nums[j]] + diff >= quant[i]) {
+    //             flag = false;
+    //             cout << mp[nums[j]]  << "  " << diff << endl;
+    //             diff = mp[nums[j]] - quant[i];
+    //             mp[nums[j]] -= quant[i];
+    //             break;
+    //         }
+    //     }
+
+    //     if(flag) return false;
+    // }
+
+    // return true;
+
+    // Nice try -: above solution passed 101/109 test-cases
+    ////////////////////////
+    
+    ///////////////////////////
+    // Using recursion Backtracking
+    //////////////////////////
+    unordered_map<int, int> mp;
+    for(auto x: nums) mp[x]++;
+
+    vector<int> counts;
+    for(auto it: mp) counts.push_back(it.second);
+
+    sort(quant.rbegin(), quant.rend());
+    return helper(counts, quant, 0);
+}
 
 
 int main() {
@@ -771,24 +848,37 @@ int main() {
 
 
 
-// Permutation 2 (leetcode)
-// vector<int> arr = {1,2,3};
-vector<int> arr = {1,1,2};
-vector<vector<int>> ans;
+// // Permutation 2 (leetcode)
+// // vector<int> arr = {1,2,3};
+// vector<int> arr = {1,1,2};
+// vector<vector<int>> ans;
 
-permutation2(arr, ans, 0);
-
-
-for(int i=0; i<ans.size(); i++) {
-    for(int j=0; j<ans[i].size(); j++) {
-        cout << ans[i][j] << " ";
-    }
-    cout << endl;
-}
+// permutation2(arr, ans, 0);
 
 
+// for(int i=0; i<ans.size(); i++) {
+//     for(int j=0; j<ans[i].size(); j++) {
+//         cout << ans[i][j] << " ";
+//     }
+//     cout << endl;
+// }
 
 
 
+// // Beautifull arrangement
+// int n = 3;
+// vector<int> temp(n+1, 0);
+// int count  = 0;
+// beautifullArrangement(temp, n, 1, count);
+
+// cout <<  count; 
+
+
+
+// Distribute repeating integers
+vector<int> nums = {108,774,486,774,297,486,980,774,108,774,774,980,108,486,108,486,108,486,297,297,774,486,774,980,980,980,108,297,774,980,297,774,108,980,486,108,297,486,486,297,297,774,774,486,297};
+vector<int> quant = {3,3,3,7,8,5,5,11};
+
+cout << canDistribute(nums, quant);
 return 0;
 }
