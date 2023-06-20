@@ -1,5 +1,6 @@
-Animals(Animals obj) {
-//    this-> age = obj.age; 
-//    this-> weight = obj.weight; 
-//    this-> name = obj.name; 
-// }
+
+// obj2.x = 10;
+// obj2.y = 20;
+// obj2.print();
+// obj1.print();
+
