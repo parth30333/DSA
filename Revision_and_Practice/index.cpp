@@ -418,51 +418,78 @@ using namespace std;
 //     }
 // }
 
-bool isSafe(vector<vector<char>>& board, int row, int col, int x) {
-    // row-wise
-    for(int i=0; i<9; i++) {
-        if(board[i][col] == x) return false;
+// bool isSafe(vector<vector<char>>& board, int row, int col, int x) {
+//     // row-wise
+//     for(int i=0; i<9; i++) {
+//         if(board[i][col] == x) return false;
+//     }
+
+//     // column-wise
+//     for(int i=0; i<9; i++) {
+//         if(board[row][i] == x) return false;
+//     }
+
+//     // Sub-matrix wise
+//     for(int i=0; i<9; i++) {
+//         if(board[3*(row/3) + i/3][3*(col/3) + i%3] == x) return false;
+//     }
+
+//     return true;
+// }
+
+
+
+// bool sudokuSolver(vector<vector<char>>& board) {
+//     for(int i=0; i<board.size(); i++) {
+//         for(int j=0; j<board[0].size(); j++) {
+//             if(board[i][j] == '.') {
+
+//                 for(char k='1'; k<='9'; k++) {
+//                     if(isSafe(board, i, j, k)) {
+//                         board[i][j] = k;
+
+//                         bool isValidSolution = sudokuSolver(board);
+//                         if(isValidSolution == true) return true;
+
+//                         else {
+//                             // backtrack
+//                             board[i][j] = '.';
+//                         }                        
+//                     }
+//                 }
+//                 return false;
+//             }
+//         }
+//     }
+//     return true;
+// }
+
+
+class Node {
+    public:
+    int data;
+    Node* next;
+
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
     }
 
-    // column-wise
-    for(int i=0; i<9; i++) {
-        if(board[row][i] == x) return false;
+    ~Node() {
+        cout <<  "Deleting Node with value = " << this->data << endl;
     }
+};
 
-    // Sub-matrix wise
-    for(int i=0; i<9; i++) {
-        if(board[3*(row/3) + i/3][3*(col/3) + i%3] == x) return false;
-    }
 
-    return true;
+Node* reverseLinkedList(Node*& prev, Node*& curr) {
+    if(curr == NULL) return prev;
+
+    Node* forward = curr->next;
+    curr->next = prev;
+    prev = curr;
+    return reverseLinkedList(prev, forward);
 }
 
-
-
-bool sudokuSolver(vector<vector<char>>& board) {
-    for(int i=0; i<board.size(); i++) {
-        for(int j=0; j<board[0].size(); j++) {
-            if(board[i][j] == '.') {
-
-                for(char k='1'; k<='9'; k++) {
-                    if(isSafe(board, i, j, k)) {
-                        board[i][j] = k;
-
-                        bool isValidSolution = sudokuSolver(board);
-                        if(isValidSolution == true) return true;
-
-                        else {
-                            // backtrack
-                            board[i][j] = '.';
-                        }                        
-                    }
-                }
-                return false;
-            }
-        }
-    }
-    return true;
-}
 
 int main() {
 // // Majority Element 2
@@ -616,6 +643,26 @@ int main() {
 //         cout << endl;
 //     }
 // }
+
+//////////////////////////////
+// linked list
+Node*  first = new Node(10);
+Node*  second = new Node(20);
+Node*  third = new Node(30);
+Node*  fourth = new Node(40);
+Node*  fifth = new Node(50);
+
+first->next = second;
+second->next = third;
+third->next = fourth;
+fourth->next = fifth;
+fifth->next = NULL;
+
+Node* prev = NULL;
+Node* curr = first;
+
+Node* head = reverseLinkedList(prev, curr);
+cout << head->data << endl;
 
 return 0;   
 }
