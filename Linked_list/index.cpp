@@ -1434,5 +1434,12 @@ int main() {
     // Node* temp = sortList(head);
     // print(temp);
 
+
+
+    // NOTE-: 1-: Check flatten linked list solution gfg-: https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1
+    // 2-: copy list with random pointer-: https://leetcode.com/problems/copy-list-with-random-pointer/
+    // 3-: Rotate list-: https://leetcode.com/problems/rotate-list/
+    // 4-: delete M nodes after N nodes-: https://practice.geeksforgeeks.org/problems/delete-n-nodes-after-m-nodes-of-a-linked-list/1
+
     return 0;
 }
