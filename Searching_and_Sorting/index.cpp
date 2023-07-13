@@ -47,30 +47,16 @@ int firstOccurrence(vector<int>arr, int target) {
 
 
 // int pivotArray(vector<int>arr) {
-//     // int leftSum = 0;
-//     // int rightSum = accumulate(arr.begin(), arr.end(),0);
+//     int leftSum = 0;
+//     int rightSum = accumulate(arr.begin(), arr.end(),0);
 
-//     // for(int i=0; i<arr.size(); i++) {
-//     //     rightSum -= arr[i];
-//     //     if(leftSum == rightSum) return i;
+//     for(int i=0; i<arr.size(); i++) {
+//         rightSum -= arr[i];
+//         if(leftSum == rightSum) return i;
 
-//     //     leftSum += arr[i];
-//     // }
-//     // return -1; 
-
-//     // alternate
-//     int s=0;
-//     int e = arr.size()-1;
-
-//     while(s<e) {
-//         if(arr[0] < arr[arr.size()-1]) return 0;
-//         int mid = s + (e-s)/2;
-    
-//         if(arr[mid] >= arr[s]) s = mid+1;
-
-//         else e = mid;
+//         leftSum += arr[i];
 //     }
-//     return s;
+//     return -1; 
 // }
 
 
@@ -128,26 +114,44 @@ int firstOccurrence(vector<int>arr, int target) {
 
 
 // int almostSorted(vector<int>arr, int key) {
-//     int s=0;
+//     // int s=0;
+//     // int e = arr.size()-1;
+
+//     // while(s<=e) {
+//     //     int mid = s + (e-s)/2;
+//     //     if(arr[mid] == key) return mid;
+
+//     //     if(arr[mid] >= arr[s] && key >= arr[mid]) {
+//     //         if(arr[mid-1] == key)  return mid-1;
+//     //         else if(arr[mid+1] == key) return mid+1;
+//     //         else s = mid+1;
+//     //     }
+
+//     //     else {
+//     //         if(key <= arr[mid] && key >= arr[s]) {
+//     //             if(key == arr[mid-1]) return mid-1;
+//     //             else if(key == arr[mid+1]) return mid+1;
+//     //         }
+//     //         else e = mid-1;
+//     //     }
+//     // }
+//     // return -1;
+
+
+//     // alternate 
+//     int s = 0;
 //     int e = arr.size()-1;
 
 //     while(s<=e) {
 //         int mid = s + (e-s)/2;
 //         if(arr[mid] == key) return mid;
 
-//         if(arr[mid] >= arr[s] && key >= arr[mid]) {
-//             if(arr[mid-1] == key)  return mid-1;
-//             else if(arr[mid+1] == key) return mid+1;
-//             else s = mid+1;
-//         }
+//         if(mid-1 >= s && arr[mid-1] == key) return mid-1;
+        
+//         if(mid+1 <= e && arr[mid+1] == key) return mid+1;
 
-//         else {
-//             if(key <= arr[mid] && key >= arr[s]) {
-//                 if(key == arr[mid-1]) return mid-1;
-//                 else if(key == arr[mid+1]) return mid+1;
-//             }
-//             else e = mid-1;
-//         }
+//         if(key > arr[mid]) s = mid+2;
+//         else e = mid-2;
 //     }
 //     return -1;
 // }
@@ -203,6 +207,7 @@ int firstOccurrence(vector<int>arr, int target) {
 //     // return sign*ans;
 
 
+    // //  alternate (using bitwise operations)
     // if(n==a) return 1;
 
     // bool isPositive = (n<0 == a<0);
@@ -567,7 +572,7 @@ int main() {
 // cout << s; // or cout << e;
 
 
-// // find pivot of a array using binary search (different than sorted rotated array)
+// // find pivot of a array using binary search (different than sorted rotated array)-: https://leetcode.com/problems/find-pivot-index/
 // // vector<int>arr{1,7,3,6,5,6};
 // vector<int>arr{-1,-1,-1,-1,-1,-1};
 // cout << pivotArray(arr);
