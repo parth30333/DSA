@@ -96,7 +96,7 @@ using namespace std;
 // void evenOdd(int n) {
 //     if(n%2==0) cout << "even";
 //     else cout << "odd";
-// }
+// }j  
 
 // int factorial(int n) {
 //     int fact = 1;

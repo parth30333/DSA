@@ -142,38 +142,92 @@ using namespace std;
 // }
 
 
-void insertAtBottom(stack<int>& s,  int el) {
-    // B.C
-    if(s.empty()) {
-        s.push(el);
-        return;
+// void insertAtBottom(stack<int>& s,  int el) {
+//     // B.C
+//     if(s.empty()) {
+//         s.push(el);
+//         return;
+//     }
+
+//     int temp = s.top();
+//     s.pop();
+//     // recursive call
+//     insertAtBottom(s, el);
+//     // Backtrack
+//     s.push(temp);
+// }
+
+
+// void reverseStack(stack<int>& s) {
+//     // B.C
+//     if(s.empty()) return;
+
+
+//     int target = s.top();
+//     s.pop();
+
+//     reverseStack(s);
+
+//     insertAtBottom(s, target);
+// }
+
+
+// void insertSortedOrder(stack<int>& s, int target) {
+//     if(s.empty()) {
+//         s.push(target);
+//         return;
+//     }
+
+//     if(s.top() >= target) {
+//         s.push(target);
+//         return;
+//     }
+
+//     int topEl = s.top();
+//     s.pop();
+
+//     // recursive call
+//     insertSortedOrder(s, target);
+
+//     // backtrack
+//     s.push(topEl);
+// }
+
+// void sortStack(stack<int>& s) {
+//     if(s.empty()) return;
+
+//     int target = s.top();
+//     s.pop();
+
+//     sortStack(s);
+
+//     insertSortedOrder(s, target);
+// }
+
+
+string checkRedundant(string& str) {
+    stack<char> s;
+    for(int i=0; i<str.size(); i++) {
+        char ch = str[i];
+        if(ch == ')' ) {
+            char topEl = s.top();
+            bool flag = true;
+
+            while(!s.empty() && topEl != '(' ) {
+                if(topEl == '+' || topEl == '-' ||
+                   topEl == '*' || topEl == '/') {
+                    flag = false;
+                   }
+
+                    topEl = s.top();
+                    s.pop();    
+            }
+            if(flag) return "Yes"; // there are redundant brackets
+        }
+        else s.push(ch);
     }
-
-    int temp = s.top();
-    s.pop();
-    // recursive call
-    insertAtBottom(s, el);
-    // Backtrack
-    s.push(temp);
+    return "No";
 }
-
-
-void reverseStack(stack<int>& s) {
-    // B.C
-    if(s.empty()) return;
-
-
-    int target = s.top();
-    s.pop();
-
-    reverseStack(s);
-
-    insertAtBottom(s, target);
-}
-
-
-
-
 
 
 
@@ -283,17 +337,22 @@ int main() {
 // cout << endl;
 
 
-stack<int>s;
-for(int i=1; i<=7; i++) {
-    s.push(i*10);
-}
+
 
 // // find middle element of a stack
+// stack<int>s;
+// for(int i=1; i<=7; i++) {
+//     s.push(i*10);
+// }
 // int size = s.size();
 // findMidElement(s, size);
 
 
 // // insert element at bottom
+// stack<int>s;
+// for(int i=1; i<=7; i++) {
+//     s.push(i*10);
+// }
 // insertAtBottom(s, 11);
 // while(!s.empty()) {
 //     cout << s.top() << " ";
@@ -303,16 +362,42 @@ for(int i=1; i<=7; i++) {
 
 
 
-// reverse a stack
-reverseStack(s);
-while(!s.empty()) {
-    cout << s.top() << " ";
-    s.pop();
-}
-cout << endl;
+// // reverse a stack
+// stack<int>s;
+// for(int i=1; i<=7; i++) {
+//     s.push(i*10);
+// }
+// reverseStack(s);
+// while(!s.empty()) {
+//     cout << s.top() << " ";
+//     s.pop();
+// }
+// cout << endl;
 
 
 
+// // Sort a stack
+// stack<int> s;
+// s.push(7);
+// s.push(9);
+// s.push(5);
+// s.push(11);
+// s.push(2);
+
+
+// sortStack(s);
+// while(!s.empty()) {
+//     cout << s.top() << " ";
+//     s.pop();
+// }
+// cout << endl;
+
+
+// Check redundant brackets in a expression
+// string str = "((a+b))";
+string str = "(a+b+(c+d))";
+
+cout << checkRedundant(str);
 
     return 0;
 }

@@ -378,8 +378,10 @@ for(int i=0; i<temp.size(); i++) {
 // int (*ptr)[10] = &arr;
 
 // cout << &arr << endl << endl;
+// cout << &arr + 1 << endl;
 
-// cout << &arr+1 << endl << endl;
+// cout << ptr+1 << endl << &arr[1] << endl;
+
 
 
 // for(int i=0; i<10; i++) {

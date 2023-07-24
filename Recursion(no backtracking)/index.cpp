@@ -638,7 +638,7 @@ int main() {
 
 
 
-// // Buy ans sell stocks-: T.C, S.C => O(n+1) = O(n+1)
+// // Buy and sell stocks-: T.C, S.C => O(n+1) = O(n+1)
 // vector<int> prices = {7,1,5,3,6,4};
 // int maxPr = INT_MIN;
 
@@ -678,9 +678,9 @@ int main() {
 
 
 // No. of dice rolls with target sum
-int n = 1;
+int n = 2;
 int k = 6;
-int target = 3;
+int target = 7;
 
 cout << diceRolls(n,k,target);
     return 0;

@@ -6,6 +6,7 @@
 #include<typeinfo>
 #include<numeric>
 #include<string>
+#include<algorithm>
 #include<set>
 using namespace std;
 
@@ -295,18 +296,18 @@ int firstOccurrence(vector<int>arr, int target) {
 //     // return vector<int>(arr.begin()+l, arr.begin()+l+k);
 
 
-//     // (b)-: using binary search
-//     int hi = firstOccurrence(arr, x);
-//     int lo = hi-1;
+    // // (b)-: using binary search
+    //     int lo = 0;
+    //     int hi = arr.size()-k;
 
-//     while(k--) {
-//         if(lo<0) hi++; // if hi = 0(means lo = -1) then all the integers will be found on right so just keep increasing "hi" 
-//         else if(hi >= arr.size()) lo--; // if hi = 4 ([1,2,3,4,5], x = 7), then lo = 3 now we now all the closest elements will be found on left as "hi" is on far right, so ke decreasing "lo"
-//         else if(x-arr[lo] > arr[hi]-x) hi++;
-//         else lo--;
-//     }
+    //     while(lo<hi) {
+    //         int mid = lo + (hi-lo)/2;
+    //         if(x-arr[mid] > arr[mid+k]-x) lo = mid+1;
+    //         else hi = mid;
+    //     }
 
-//     return vector<int>(arr.begin()+lo+1, arr.begin()+hi);
+
+    //     return vector<int>(arr.begin()+lo, arr.begin()+lo+k);
 // }
 
 
@@ -319,8 +320,8 @@ int firstOccurrence(vector<int>arr, int target) {
 //         i=j;
 //         j *= 2;
 //     }
-
-//     int ans = binarySearch(arr, target, i, j);
+//     int e = min(j, arr.size()-1);
+//     int ans = binarySearch(arr, target, i, e);
 //     return ans;
 // }
 

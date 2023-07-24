@@ -11,103 +11,125 @@
 #include<unordered_map>
 #include<map>
 #include<numeric>
+#include<set>
 
 using namespace std;
 
+// Functions
+// void merge(vector<int>& arr, int s, int e, int mid) {
+//     int len1 = mid-s+1;
+//     int len2 = e-mid;
 
-// functions
-// int almostSorted(vector<int> arr, int key) {
-//     int s = 0;
-//     int e = arr.size()-1;
+//     int* left = new int[len1];
+//     int* right = new int[len2];
 
-//     while(s<=e) {
-//         int mid = s + (e-s)/2;
-//         if(arr[mid] == key) return mid;
+//     int k = s;
+//     for(int i=0; i<len1; i++) left[i] = arr[k++];
 
-//         if(arr[s] <= arr[mid] && key >= arr[mid]) {
-//             if(arr[mid-1] == key) return mid-1;
-//             else if(arr[mid+1] == key) return mid+1;
-//             else s = mid+1;
-//         }
-//         else {
-//             if(arr[mid] >= arr[s] && key <= arr[mid]) {
-//                 if(arr[mid-1] == key) return mid-1;
-//                 else if(arr[mid+1] == key) return mid+1;
-//             }
-//             else e = mid-1;
-//         }
+//     k = mid+1;
+//     for(int i=0; i<len1; i++) right[i] = arr[k++];
+
+
+//     int leftInd = 0;
+//     int rightInd = 0;
+//     int mainInd = s;
+
+//     while(leftInd < len1 && rightInd < len2) {
+//         if(left[leftInd] < right[rightInd]) arr[mainInd++] = left[leftInd++];
+
+//         else arr[mainInd++] = right[rightInd++];
 //     }
-//     return -1;
+
+//     while(leftInd < len1) arr[mainInd++] = left[leftInd++];
+
+//     while(rightInd < len2) arr[mainInd++] = right[rightInd++];
 // }
 
+// void mergeSort(vector<int>& arr, int s, int e) {
+//     if(s>=e) return;
 
-// int binarySearch(vector<int>& arr, int k) {
-//     int s = 0;
-//     int e = arr.size()-1;
-//     while(s<=e) {
-//         int mid = s + (e-s)/2;
-//         if(arr[mid] == k) return mid;
+//     int mid = s+(e-s)/2;
+//     mergeSort(arr, s, mid);
+//     mergeSort(arr, mid+1, e);
 
-//         else if(arr[mid] > k) e = mid-1;
+//     merge(arr, s, e, mid);
+// }
 
-//         else s = mid+1;
+// int pivot(vector<int>& arr, int s, int e) {
+//     int pivInd = s;
+//     int pivEL = arr[s];
+
+//     int count = 0;
+//     for(int i=s+1; i<=e; i++) if(arr[i] <= pivEL) count++;
+
+//     swap(arr[pivInd], arr[s+count]);
+
+//     pivInd = s+count;
+//     int i = s;
+//     int j = e;
+
+//     while(i<j) {
+//         while(arr[i] <= pivEL) i++;
+
+//         while(arr[j] > pivEL) j--;
+
+//         if(i<j) swap(arr[i], arr[j]);
 //     }
-//     return -1;
-// }
-
-// string isKsorted(vector<int>& arr, int k) {
-//     vector<int> temp(arr.size());
-
-//     for(int i=0; i<arr.size(); i++) temp[i] = arr[i];
-
-//     sort(temp.begin(), temp.end());
-//     int count = -1;
-//     string ans = "No";
-
-//     for(int i=0; i<arr.size(); i++) {
-//         count = binarySearch(temp, arr[i]);
-//         if(abs(i-count) > k) return ans;
-//     }    
-//     return "Yes";
+//     return pivInd;
 // }
 
 
+// void quickSort(vector<int>& arr, int s, int e) {
+//     if(s>=e) return;
 
-int divide(int n, int a) {
-    if(n == a) return 1;
-    bool  isPositive = (n<0 == a<0);
-    unsigned int div = n;
-    unsigned int dvs = a;
+//     int piv = pivot(arr, s, e);
 
-    unsigned int result = 0;
-    while(div >= dvs) {
-        long long temp = dvs; int count = 0;
-        while(div >= temp << 1 << count) {
-            count++;
-        } 
+//     quickSort(arr, s, piv-1);
+//     quickSort(arr, piv+1, e);
+// }
 
-        result += 1 << count;
-        div -= dvs << count;
-    }
-    if(result == 1 << 31 && isPositive) return INT_MAX;
-    return isPositive ? result : -result;
-}
+// void permutationOfStr(string& s, int i) {
+//     if(i >= s.size()) {
+//         cout << s << " ";
+//         return;
+//     }
+
+//     for(int j=i; j<s.size(); j++) {
+//         swap(s[i], s[j]);
+
+//         permutationOfStr(s, i+1);
+
+//         swap(s[i], s[j]);
+//     }
+// }
 
 
 int main() {
+// // Merge Sort    
+// // vector<int> arr = {4,13,52,8,31};
+// vector<int> arr = {4,13,52,8,31,1,7};
 
-// // almost sorted array
-// vector<int> arr = {10,3,40,20,50,80,70};
-// cout << almostSorted(arr, 80);
+// mergeSort(arr, 0, arr.size()-1);
+
+// for(auto x: arr) cout << x << " ";
+// cout << endl;
 
 
-// // check if array is k Sorted array
-// vector<int> arr = {3,2,1,5,6,4};
-// cout << isKsorted(arr, 2);
+// // Quick Sort
+// vector<int> arr = {4,13,52,8,31,1,7};
+
+// quickSort(arr, 0, arr.size()-1);
+
+// for(auto x: arr) cout << x << " ";
 
 
-// divide 2 integers
-cout << divide(10,2);
+// // Permutation of a string
+// string s = "abc";
 
-    return 0;
+// permutationOfStr(s, 0);
+
+
+
+
+return 0;
 }

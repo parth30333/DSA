@@ -602,64 +602,64 @@ using namespace std;
 
 
 
-helper(vector<int>& counts, vector<int>& quant, int ithOrder) {
-    if(ithOrder == quant.size()) {
-        return true;
-    }
+// bool helper(vector<int>& counts, vector<int>& quant, int ithOrder) {
+//     if(ithOrder == quant.size()) {
+//         return true;
+//     }
 
-    for(int i=0; i<counts.size(); i++) {
-        if(counts[i] - quant[ithOrder] >= 0) {
-            counts[i] -= quant[ithOrder];
-            if(helper(counts, quant, ithOrder+1)) return true;
+//     for(int i=0; i<counts.size(); i++) {
+//         if(counts[i] - quant[ithOrder] >= 0) {
+//             counts[i] -= quant[ithOrder];
+//             if(helper(counts, quant, ithOrder+1)) return true;
 
-            // backtrack
-            counts[i] += quant[ithOrder];
-        }
-    }
-    return false;
-}
+//             // backtrack
+//             counts[i] += quant[ithOrder];
+//         }
+//     }
+//     return false;
+// }
 
 
 
-bool canDistribute(vector<int> nums, vector<int> quant) {
-    // map<int, int> mp;
-    // for(auto x: nums) mp[x]++;
+// bool canDistribute(vector<int> nums, vector<int> quant) {
+//     // map<int, int> mp;
+//     // for(auto x: nums) mp[x]++;
 
-    // for(auto it = mp.begin(); it != mp.end(); it++) cout << it->first << "-: " << it->second << endl;
+//     // for(auto it = mp.begin(); it != mp.end(); it++) cout << it->first << "-: " << it->second << endl;
 
-    // int diff = 0;
-    // for(int i=0; i<quant.size(); i++) {
-    //     bool flag = true;
-    //     for(int j=0; j<nums.size(); j++) {
-    //         if(mp[nums[j]] + diff >= quant[i]) {
-    //             flag = false;
-    //             cout << mp[nums[j]]  << "  " << diff << endl;
-    //             diff = mp[nums[j]] - quant[i];
-    //             mp[nums[j]] -= quant[i];
-    //             break;
-    //         }
-    //     }
+//     // int diff = 0;
+//     // for(int i=0; i<quant.size(); i++) {
+//     //     bool flag = true;
+//     //     for(int j=0; j<nums.size(); j++) {
+//     //         if(mp[nums[j]] + diff >= quant[i]) {
+//     //             flag = false;
+//     //             cout << mp[nums[j]]  << "  " << diff << endl;
+//     //             diff = mp[nums[j]] - quant[i];
+//     //             mp[nums[j]] -= quant[i];
+//     //             break;
+//     //         }
+//     //     }
 
-    //     if(flag) return false;
-    // }
+//     //     if(flag) return false;
+//     // }
 
-    // return true;
+//     // return true;
 
-    // Nice try -: above solution passed 101/109 test-cases
-    ////////////////////////
+//     // Nice try -: above solution passed 101/109 test-cases
+//     ////////////////////////
     
-    ///////////////////////////
-    // Using recursion Backtracking
-    //////////////////////////
-    unordered_map<int, int> mp;
-    for(auto x: nums) mp[x]++;
+//     ///////////////////////////
+//     // Using recursion Backtracking
+//     //////////////////////////
+//     unordered_map<int, int> mp;
+//     for(auto x: nums) mp[x]++;
 
-    vector<int> counts;
-    for(auto it: mp) counts.push_back(it.second);
+//     vector<int> counts;
+//     for(auto it: mp) counts.push_back(it.second);
 
-    sort(quant.rbegin(), quant.rend());
-    return helper(counts, quant, 0);
-}
+//     sort(quant.rbegin(), quant.rend());
+//     return helper(counts, quant, 0);
+// }
 
 
 int main() {
@@ -681,6 +681,7 @@ int main() {
 // quickSort(arr, 0, arr.size()-1);
 
 // for(auto x: arr) cout << x << " ";
+
 
 
 //////////////////
@@ -875,10 +876,10 @@ int main() {
 
 
 
-// Distribute repeating integers
-vector<int> nums = {108,774,486,774,297,486,980,774,108,774,774,980,108,486,108,486,108,486,297,297,774,486,774,980,980,980,108,297,774,980,297,774,108,980,486,108,297,486,486,297,297,774,774,486,297};
-vector<int> quant = {3,3,3,7,8,5,5,11};
+// // Distribute repeating integers
+// vector<int> nums = {108,774,486,774,297,486,980,774,108,774,774,980,108,486,108,486,108,486,297,297,774,486,774,980,980,980,108,297,774,980,297,774,108,980,486,108,297,486,486,297,297,774,774,486,297};
+// vector<int> quant = {3,3,3,7,8,5,5,11};
 
-cout << canDistribute(nums, quant);
+// cout << canDistribute(nums, quant);
 return 0;
 }
